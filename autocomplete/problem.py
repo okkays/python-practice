@@ -1,39 +1,9 @@
 from typing import List
 import unittest
 
-import itertools
-
-
-def clean_chat(chat: str) -> str:
-  return chat[chat.find('>') + 1:].strip()
-
-
-def pairwise(iterable):
-  a, b = itertools.tee(iterable)
-  next(b, None)
-  return zip(a, b)
-
-
-def process_chat(words_to_next_words: dict, chat: str) -> str:
-  for word, next_word in pairwise(chat.split()):
-    next_words = words_to_next_words.get(word, {})
-    new_count = next_words.get(next_word, 0) + 1
-    next_words[next_word] = new_count
-    words_to_next_words[word] = next_words
-
 
 def autocomplete(filename: str, word: str, num_results: int) -> List[str]:
-  with open(filename, 'r') as f:
-    chats = [clean_chat(chat) for chat in f.readlines()]
-  words_to_next_words = {}
-  for chat in chats:
-    process_chat(words_to_next_words, chat)
-  next_words = words_to_next_words.get(word)
-  if not next_words:
-    return []
-  sorted_tuples = sorted(list(next_words.items()), key=lambda t: -t[1])
-  print(sorted_tuples[:num_results])
-  return [word for word, count in sorted_tuples[:num_results]]
+  raise NotImplementedError('Your code goes here!')
 
 
 duck_example = [
